@@ -2,14 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Menu implements InterfaceMenu{
-    private List<Menu> menu = new ArrayList<Menu>();
+public class Menu implements InterfaceMenu {
+    private List<Menu> menus = new ArrayList<Menu>();
     private int ID;
     private String name;
     private int amount;
     private double mass;
 
-    public Menu(){}
+    public Menu() {
+    }
 
     public Menu(int ID, String name, double mass) {
         this.ID = ID;
@@ -17,7 +18,7 @@ public class Menu implements InterfaceMenu{
         this.mass = mass;
     }
 
-    public Menu(int ID,String name, int amount) {
+    public Menu(int ID, String name, int amount) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
@@ -55,44 +56,46 @@ public class Menu implements InterfaceMenu{
         this.mass = mass;
     }
 
-    public void addMenu(int ID,String name, int amount) {
-        menu.add(new Menu(ID, name, amount));
+    public void addMenu(int ID, String name, int amount) {
+        menus.add(new Menu(ID, name, amount));
     }
 
     public void deleteMenu(String name) {
-        for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().equals(name)) {
-                menu.remove(menu.get(i));
+        for (int i = 0; i < menus.size(); i++) {
+            if (menus.get(i).getName().equals(name)) {
+                menus.remove(menus.get(i));
             }
         }
     }
 
-    public void EditMenu() {
+    public void editMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập tên món ăn cần sửa");
-        String name = scanner.next();
-        for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getName().equals(name)) {
+        showMenu();
+        System.out.println("Chọn món bạn muốn sửa");
+        int choose = scanner.nextInt();
+        for (int i = 0; i < menus.size(); i++) {
+            if (choose == menus.get(i).getID()) {
                 System.out.println("Sửa tên món thành");
                 String newName = scanner.next();
-                menu.get(i).setName(newName);
+                menus.get(i).setName(newName);
                 System.out.println("Sửa giá món thành");
                 int newAmount = scanner.nextInt();
-                menu.get(i).setAmount(newAmount);
+                menus.get(i).setAmount(newAmount);
             }
         }
+        showMenu();
     }
 
     public void showMenu() {
         System.out.println("   ---> MENU <---");
-        addMenu(1,"Phở tái    ---> ", 30000);
-        addMenu(2,"Phở chín   ---> ", 30000);
-        addMenu(3,"Bún bò tái ---> ", 30000);
-        addMenu(4,"Cơm giang  ---> ", 30000);
-        addMenu(5,"Nếu bạn muốn đổi món xin chọn  ---> ", 5);
-        addMenu(6,"Exit --> ",0);
-        for (int i = 0; i < menu.size(); i++) {
-            System.out.println( menu.get(i).getID() + "." + menu.get(i).getName() + menu.get(i).getAmount());
+        addMenu(1, "Phở tái    ---> ", 30000);
+        addMenu(2, "Phở chín   ---> ", 30000);
+        addMenu(3, "Bún bò tái ---> ", 30000);
+        addMenu(4, "Cơm giang  ---> ", 30000);
+        addMenu(5, "Nếu bạn muốn đổi món xin chọn  ---> ", 5);
+        addMenu(6, "Exit --> ", 0);
+        for (int i = 0; i < menus.size(); i++) {
+            System.out.println(menus.get(i).getID() + "." + menus.get(i).getName() + menus.get(i).getAmount());
         }
     }
 }
